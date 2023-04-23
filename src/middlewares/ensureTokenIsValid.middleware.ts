@@ -18,7 +18,7 @@ const ensureTokenIsValidMiddleware = async (
     if (err) {
       throw new AppError(err.message, 403);
     }
-    res.locals.birthDate = decoded.birthDate;
+    res.locals.admin = decoded.admin;
   });
 
   return next();
