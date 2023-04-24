@@ -11,5 +11,5 @@ export const createSessionController = async (
 ): Promise<Response> => {
   const userData: TLoginRequest = req.body;
   const token: TLoginResponse = await createSessionService(userData);
-  return res.status(201).json(token);
+  return res.json(token);
 };

@@ -67,7 +67,7 @@ const updateUserService = async (
 
     let newUser: TUserResponse = {
       ...queryResult.rows[0],
-      newData,
+      ...newData,
     };
 
     const user = updateUserSchema.parse(newUser);

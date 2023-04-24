@@ -18,23 +18,23 @@ const recoverUserService = async (id: number) => {
   };
 
   const queryResult: QueryResult = await client.query(queryConfig);
-  console.log(queryResult);
 
-  const userActive = queryResult.rows[0].active;
+  const user = queryResult.rows[0];
 
-  console.log(userActive);
+  const { active } = user;
 
-  if (userActive === true) {
-    throw new AppError("User already active", 400);
-  } else {
+  console.log(active);
+
+  if (active === false || active === undefined || active === null) {
     const queryString: string = `
-        UPDATE 
-        users
-        SET 
-        "active" = 'true'
-        WHERE
-        id = $1;
-        `;
+    UPDATE 
+    users
+    SET 
+    "active" = 'true'
+    WHERE
+    id = $1
+    RETURNING *;
+    `;
 
     const queryConfig: QueryConfig = {
       text: queryString,
@@ -46,6 +46,8 @@ const recoverUserService = async (id: number) => {
     const user = responseUserSchema.parse(queryResult.rows[0]);
 
     return user;
+  } else {
+    throw new AppError("User already active", 400);
   }
 };
 
