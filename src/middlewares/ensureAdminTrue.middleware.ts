@@ -8,7 +8,7 @@ const ensureAdminTrueMiddleware = async (
 ): Promise<Response | void> => {
   const { admin } = res.locals;
 
-  if (admin == false) {
+  if (admin === false) {
     throw new AppError("Insufficient Permission", 403);
   }
 
