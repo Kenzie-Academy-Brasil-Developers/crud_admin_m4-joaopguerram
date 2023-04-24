@@ -31,7 +31,7 @@ const createSessionService = async (
   const user = queryResult.rows[0];
 
   if (queryResult.rowCount === 0) {
-    throw new AppError("Wrong email or password!", 401);
+    throw new AppError("Wrong email/password", 401);
   }
 
   const comparePassword: boolean = await bcrypt.compare(
@@ -40,7 +40,7 @@ const createSessionService = async (
   );
 
   if (comparePassword === false) {
-    throw new AppError("Wrong email or password!", 401);
+    throw new AppError("Wrong email/password", 401);
   }
 
   const token: string = jwt.sign(
