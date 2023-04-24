@@ -15,6 +15,18 @@ const requestUserSchema = userSchema
 
 const responseUserSchema = userSchema.omit({ password: true });
 
-const updateUserSchema = userSchema.partial();
+const updateUserSchema = userSchema.omit({ password: true }).partial();
 
-export { userSchema, requestUserSchema, responseUserSchema, updateUserSchema };
+const updateRequestUserSchema = updateUserSchema.omit({
+  id: true,
+  admin: true,
+  active: true,
+});
+
+export {
+  userSchema,
+  requestUserSchema,
+  responseUserSchema,
+  updateUserSchema,
+  updateRequestUserSchema,
+};

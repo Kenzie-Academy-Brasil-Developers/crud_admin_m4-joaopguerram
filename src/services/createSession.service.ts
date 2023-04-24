@@ -29,7 +29,6 @@ const createSessionService = async (
 
   const queryResult: QueryResult = await client.query(queryConfig);
   const user = queryResult.rows[0];
-  console.log(user, queryResult);
 
   if (queryResult.rowCount === 0) {
     throw new AppError("Wrong email or password!", 401);
@@ -39,8 +38,6 @@ const createSessionService = async (
     userData.password,
     user.password
   );
-
-  console.log(user, queryResult);
 
   if (comparePassword === false) {
     throw new AppError("Wrong email or password!", 401);
